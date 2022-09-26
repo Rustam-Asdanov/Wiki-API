@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 const port = 3000;
 
+console.log("sss");
+
 app.listen(port, () => {
   console.log(`Server listen on port ${port}`);
 });
