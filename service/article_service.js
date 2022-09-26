@@ -4,6 +4,10 @@ const allArticles = () => {
   return Article.find({});
 };
 
+const oneArticle = (search_title) => {
+  return Article.findOne({ title: search_title });
+};
+
 const addArticle = (body) => {
   const newArticle = new Article({
     title: body.title,
@@ -13,7 +17,13 @@ const addArticle = (body) => {
   return newArticle.save();
 };
 
+const clearBase = () => {
+  return Article.deleteMany();
+};
+
 module.exports = {
   allArticles,
   addArticle,
+  oneArticle,
+  clearBase,
 };

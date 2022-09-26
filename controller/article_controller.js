@@ -1,8 +1,19 @@
-const { allArticles, addArticle } = require("../service/article_service");
+const {
+  allArticles,
+  addArticle,
+  oneArticle,
+  clearBase,
+} = require("../service/article_service");
 
 const getAllArticles = async (req, res) => {
   await allArticles()
-    .then((result) => res.status(200).json(result))
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err));
+};
+
+const getArticleByTitle = async (req, res) => {
+  await oneArticle(req.query.title)
+    .then((response) => res.status(200).json(response))
     .catch((err) => res.status(500).json(err));
 };
 
@@ -15,7 +26,15 @@ const createArticle = async (req, res) => {
     .catch((err) => res.status(500).json(err));
 };
 
+const removeAllArticles = async (req, res) => {
+  await clearBase()
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err));
+};
+
 module.exports = {
   getAllArticles,
   createArticle,
+  getArticleByTitle,
+  removeAllArticles,
 };
