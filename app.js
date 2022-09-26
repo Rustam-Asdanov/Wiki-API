@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const ejs = requires("ejs");
+const connectDB = require("./db/connection");
+// const ejs = requires("ejs");
+require("dotenv").config();
 
 const app = express();
 
@@ -10,8 +11,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 const port = 3000;
 
-console.log("sss");
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URL);
+    app.listen(port, () => {
+      console.log(`Server listen on port ${port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-app.listen(port, () => {
-  console.log(`Server listen on port ${port}`);
-});
+start();
