@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./db/connection");
+const articleRouter = require("./router/article_router");
 // const ejs = requires("ejs");
 require("dotenv").config();
 
@@ -10,6 +11,10 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 const port = 3000;
+
+// routes
+
+app.use("/articles", articleRouter);
 
 const start = async () => {
   try {
