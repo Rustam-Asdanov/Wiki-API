@@ -4,6 +4,7 @@ const {
   createArticle,
   getArticleByTitle,
   removeAllArticles,
+  removeArticleByTitle,
 } = require("../controller/article_controller");
 
 const router = Router();
@@ -14,6 +15,6 @@ router
   .post(createArticle)
   .delete(removeAllArticles);
 
-router.route("/:title").get(getArticleByTitle);
+router.route("/:title").get(getArticleByTitle).delete(removeArticleByTitle);
 
 module.exports = router;

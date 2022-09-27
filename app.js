@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./db/connection");
 const articleRouter = require("./router/article_router");
-// const ejs = requires("ejs");
 require("dotenv").config();
 
 const app = express();

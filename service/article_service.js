@@ -4,8 +4,8 @@ const allArticles = () => {
   return Article.find({});
 };
 
-const oneArticle = (search_title) => {
-  return Article.findOne({ title: search_title });
+const oneArticle = (articleTitle) => {
+  return Article.findOne({ title: articleTitle });
 };
 
 const addArticle = (body) => {
@@ -21,9 +21,14 @@ const clearBase = () => {
   return Article.deleteMany();
 };
 
+const deleteArticle = (articleTitle) => {
+  return Article.deleteOne({ title: articleTitle });
+};
+
 module.exports = {
   allArticles,
   addArticle,
   oneArticle,
   clearBase,
+  deleteArticle,
 };
