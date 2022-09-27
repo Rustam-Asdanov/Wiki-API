@@ -5,6 +5,8 @@ const {
   getArticleByTitle,
   removeAllArticles,
   removeArticleByTitle,
+  changeArticleByTitle,
+  updateArticleByTitle,
 } = require("../controller/article_controller");
 
 const router = Router();
@@ -15,6 +17,11 @@ router
   .post(createArticle)
   .delete(removeAllArticles);
 
-router.route("/:title").get(getArticleByTitle).delete(removeArticleByTitle);
+router
+  .route("/:title")
+  .get(getArticleByTitle)
+  .delete(removeArticleByTitle)
+  .put(changeArticleByTitle)
+  .patch(updateArticleByTitle);
 
 module.exports = router;

@@ -4,6 +4,8 @@ const {
   oneArticle,
   clearBase,
   deleteArticle,
+  changeArticle,
+  updateArticle,
 } = require("../service/article_service");
 
 const getAllArticles = async (req, res) => {
@@ -34,12 +36,35 @@ const removeAllArticles = async (req, res) => {
 };
 
 const removeArticleByTitle = async (req, res) => {
-  await deleteArticle(req.params.titlle)
+  console.log(req.params.title);
+  await deleteArticle(req.params.title)
     .then((response) =>
       res
         .status(200)
-        .status({ message: `Title ${req.params.titlle} deleted successfully.` })
+        .json({ message: `Title ${req.params.title} deleted successfully.` })
     )
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+};
+
+const changeArticleByTitle = async (req, res) => {
+  const articleTitle = req.params.title;
+  const newArticle = req.body;
+  await changeArticle(articleTitle, newArticle)
+    .then((response) => res.status(200).json(response))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+};
+
+const updateArticleByTitle = async (req, res) => {
+  const articleTitle = req.params.title;
+  const newArticle = req.body;
+  await updateArticle(articleTitle, newArticle)
+    .then((response) => res.status(200).json(response))
     .catch((err) => res.status(500).json(err));
 };
 
@@ -49,4 +74,6 @@ module.exports = {
   getArticleByTitle,
   removeAllArticles,
   removeArticleByTitle,
+  changeArticleByTitle,
+  updateArticleByTitle,
 };
